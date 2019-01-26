@@ -13,5 +13,4 @@ namespace Endroid\AdventureBundle\Message\Command;
 
 class LookAt
 {
-    
 }

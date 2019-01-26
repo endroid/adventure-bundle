@@ -15,6 +15,5 @@ class LookAtHandler
 {
     public function __invoke(LookAt $command)
     {
-
     }
 }

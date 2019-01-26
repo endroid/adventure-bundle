@@ -57,13 +57,13 @@ class RandomAdventureBuilder
         die;
 
         $mainCharacters = [];
-        for ($i = 0; $i < $this->mainCharacterCount; $i++) {
+        for ($i = 0; $i < $this->mainCharacterCount; ++$i) {
             $mainCharacter = new Character($this->faker->name);
             $mainCharacters[] = $mainCharacter;
         }
 
         $otherCharacters = [];
-        for ($i = 0; $i < $this->otherCharacterCount; $i++) {
+        for ($i = 0; $i < $this->otherCharacterCount; ++$i) {
             $otherCharacter = new Character($this->faker->name);
             $otherCharacters[] = $otherCharacter;
         }
