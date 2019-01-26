@@ -1,0 +1,3 @@
+endroid_adventure:
+    resource: "@EndroidAdventureBundle/Resources/config/routes.yaml"
+    prefix: /adventure
