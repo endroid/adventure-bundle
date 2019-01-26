@@ -9,9 +9,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Entity;
+namespace Endroid\AdventureBundle\Message\Command;
 
-class City
+class LookAt
 {
-    public $name;
+    
 }

@@ -11,16 +11,16 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Controller;
 
-use Endroid\AdventureBundle\Builder;
+use Endroid\AdventureBundle\RandomAdventureBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class AdventureController
+final class PlayController
 {
     private $builder;
     private $templating;
 
-    public function __construct(Builder $builder, Environment $templating)
+    public function __construct(RandomAdventureBuilder $builder, Environment $templating)
     {
         $this->builder = $builder;
         $this->templating = $templating;
@@ -28,7 +28,15 @@ final class AdventureController
 
     public function __invoke(): Response
     {
-        $adventure = $this->builder->createRandom();
+        $adventure = $this->builder
+            ->setMainCharacterCount(4)
+            ->setOtherCharacterCount(20)
+            ->setLocationCount(10)
+            ->setItemCount(20)
+        ;
+
+        dump($adventure);
+        die;
 
         return new Response($this->templating->render('@EndroidAdventure/adventure.html.twig'));
     }

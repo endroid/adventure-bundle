@@ -13,6 +13,23 @@ namespace Endroid\AdventureBundle\Entity;
 
 class Adventure
 {
-    public $name;
-    public $items;
+    private $name;
+    private $mainCharacters;
+    private $otherCharacters;
+    private $locations;
+    private $items;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+        $this->mainCharacters = [];
+        $this->otherCharacters = [];
+        $this->locations = [];
+        $this->items = [];
+    }
+
+    public function addMainCharacter(Character $character): void
+    {
+        $this->characters[$character->getName()] = $character;
+    }
 }

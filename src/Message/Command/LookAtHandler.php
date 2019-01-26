@@ -9,14 +9,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle;
+namespace Endroid\AdventureBundle\Message\Command;
 
-use Endroid\AdventureBundle\Entity\Adventure;
-
-class Builder
+class LookAtHandler
 {
-    public function createRandom(): Adventure
+    public function __invoke(LookAt $command)
     {
-        $adventure = new Adventure();
+
     }
 }
