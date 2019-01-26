@@ -9,10 +9,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle;
+namespace Endroid\AdventureBundle\Builder;
 
 use Endroid\AdventureBundle\Entity\Adventure;
 use Endroid\AdventureBundle\Entity\Character;
+use Endroid\AdventureBundle\Entity\Item;
+use Endroid\AdventureBundle\Entity\Location;
 use Faker\Factory;
 
 class RandomAdventureBuilder
@@ -24,50 +26,63 @@ class RandomAdventureBuilder
 
     private $faker;
 
-    public function __construct(Factory $fakerFactory)
+    public function __construct()
     {
-        $this->faker = $fakerFactory->create();
+        $this->faker = Factory::create('en');
     }
 
-    public function setMainCharacterCount(int $mainCharacterCount): void
+    public function setMainCharacterCount(int $mainCharacterCount): self
     {
         $this->mainCharacterCount = $mainCharacterCount;
+
+        return $this;
     }
 
-    public function setOtherCharacterCount(int $otherCharacterCount): void
+    public function setOtherCharacterCount(int $otherCharacterCount): self
     {
         $this->otherCharacterCount = $otherCharacterCount;
+
+        return $this;
     }
 
-    public function setLocationCount(int $locationCount): void
+    public function setLocationCount(int $locationCount): self
     {
         $this->locationCount = $locationCount;
+
+        return $this;
     }
 
-    public function setItemCount(int $itemCount): void
+    public function setItemCount(int $itemCount): self
     {
         $this->itemCount = $itemCount;
+
+        return $this;
     }
 
     public function build(): Adventure
     {
         $adventure = new Adventure($this->faker->domainName);
 
-        dump($adventure);
-        die;
-
-        $mainCharacters = [];
         for ($i = 0; $i < $this->mainCharacterCount; ++$i) {
             $mainCharacter = new Character($this->faker->name);
-            $mainCharacters[] = $mainCharacter;
+            $adventure->addMainCharacter($mainCharacter);
         }
 
-        $otherCharacters = [];
         for ($i = 0; $i < $this->otherCharacterCount; ++$i) {
             $otherCharacter = new Character($this->faker->name);
-            $otherCharacters[] = $otherCharacter;
+            $adventure->addOtherCharacter($otherCharacter);
         }
 
-        return parent::build();
+        for ($i = 0; $i < $this->locationCount; $i++) {
+            $location = new Location($this->faker->streetName);
+            $adventure->addLocation($location);
+        }
+
+        for ($i = 0; $i < $this->itemCount; $i++) {
+            $item = new Item($this->faker->word);
+            $adventure->addItem($item);
+        }
+
+        return $adventure;
     }
 }

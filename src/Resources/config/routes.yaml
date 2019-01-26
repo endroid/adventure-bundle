@@ -1,3 +1,0 @@
-adventure:
-    path: /
-    controller: Endroid\AdventureBundle\Controller\AdventureController

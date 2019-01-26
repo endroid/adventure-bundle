@@ -11,8 +11,9 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Controller;
 
-use Endroid\AdventureBundle\RandomAdventureBuilder;
+use Endroid\AdventureBundle\Builder\RandomAdventureBuilder;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 final class PlayController
@@ -26,6 +27,9 @@ final class PlayController
         $this->templating = $templating;
     }
 
+    /**
+     * @Route("/play")
+     */
     public function __invoke(): Response
     {
         $adventure = $this->builder
@@ -33,6 +37,7 @@ final class PlayController
             ->setOtherCharacterCount(20)
             ->setLocationCount(10)
             ->setItemCount(20)
+            ->build()
         ;
 
         dump($adventure);

@@ -1,3 +1,4 @@
 endroid_adventure:
-    resource: "@EndroidAdventureBundle/Resources/config/routes.yaml"
+    resource: "@EndroidAdventureBundle/Controller/"
+    type: annotation
     prefix: /adventure

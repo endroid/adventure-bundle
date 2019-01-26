@@ -13,20 +13,13 @@ namespace Endroid\AdventureBundle\Entity;
 
 class Location
 {
-    private $id;
     private $name;
     private $connectedLocations;
 
-    public function __construct($id, $name)
+    public function __construct($name)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->connectedLocations = [];
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getName(): string
@@ -36,6 +29,6 @@ class Location
 
     public function connectTo(Location $location): void
     {
-        $this->connectedLocations[$location->getId()] = $location;
+        $this->connectedLocations[$location->getName()] = $location;
     }
 }

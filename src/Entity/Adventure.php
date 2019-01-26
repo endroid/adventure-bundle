@@ -30,6 +30,21 @@ class Adventure
 
     public function addMainCharacter(Character $character): void
     {
-        $this->characters[$character->getName()] = $character;
+        $this->mainCharacters[$character->getName()] = $character;
+    }
+
+    public function addOtherCharacter(Character $character): void
+    {
+        $this->otherCharacters[$character->getName()] = $character;
+    }
+
+    public function addLocation(Location $location): void
+    {
+        $this->locations[$location->getName()] = $location;
+    }
+
+    public function addItem(Item $item): void
+    {
+        $this->items[$item->getName()] = $item;
     }
 }
