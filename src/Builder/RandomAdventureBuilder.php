@@ -77,7 +77,7 @@ class RandomAdventureBuilder
             $adventure->addOtherCharacter($otherCharacter);
         }
 
-        for ($i = 0; $i < $this->itemCount; $i++) {
+        for ($i = 0; $i < $this->itemCount; ++$i) {
             $item = new Item($this->createId(), $this->faker->word);
             $adventure->addItem($item);
         }
@@ -87,7 +87,7 @@ class RandomAdventureBuilder
 
     private function buildLocations(RandomAdventure $adventure): void
     {
-        for ($i = 0; $i < $this->locationCount; $i++) {
+        for ($i = 0; $i < $this->locationCount; ++$i) {
             $location = new Location($this->createId(), $this->faker->streetName);
             $adventure->addLocation($location);
         }

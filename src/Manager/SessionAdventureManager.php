@@ -12,10 +12,6 @@ declare(strict_types=1);
 namespace Endroid\AdventureBundle\Manager;
 
 use Endroid\AdventureBundle\Entity\Adventure;
-use Endroid\AdventureBundle\Entity\Character;
-use Endroid\AdventureBundle\Entity\Item;
-use Endroid\AdventureBundle\Entity\Location;
-use Faker\Factory;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionAdventureManager implements AdventureManagerInterface

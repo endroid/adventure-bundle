@@ -16,5 +16,6 @@ use Endroid\AdventureBundle\Entity\Adventure;
 interface AdventureManagerInterface
 {
     public function add(Adventure $adventure): void;
+
     public function get(string $id): Adventure;
 }
