@@ -11,24 +11,31 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+use Endroid\AdventureBundle\Traits\IdTrait;
+use Endroid\AdventureBundle\Traits\NameTrait;
+
 class Location
 {
-    private $name;
+    use IdTrait;
+    use NameTrait;
+
     private $connectedLocations;
 
-    public function __construct($name)
+    public function __construct(string $id, string $name)
     {
+        $this->id = $id;
         $this->name = $name;
-        $this->connectedLocations = [];
-    }
 
-    public function getName(): string
-    {
-        return $this->name;
+        $this->connectedLocations = [];
     }
 
     public function connectTo(Location $location): void
     {
-        $this->connectedLocations[$location->getName()] = $location;
+        if (isset($this->connectedLocations[$location->getId()])) {
+            return;
+        }
+
+        $this->connectedLocations[$location->getId()] = $location;
+        $location->connectTo($this);
     }
 }

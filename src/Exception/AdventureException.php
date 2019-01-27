@@ -9,11 +9,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Message\Command;
+namespace Endroid\AdventureBundle\Exception;
 
-class LookAtHandler
+use Exception;
+
+abstract class AdventureException extends Exception
 {
-    public function __invoke(LookAt $command)
-    {
-    }
 }

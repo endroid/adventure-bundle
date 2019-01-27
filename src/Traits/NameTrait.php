@@ -9,13 +9,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Entity;
+namespace Endroid\AdventureBundle\Traits;
 
-use Endroid\AdventureBundle\Traits\IdTrait;
-use Endroid\AdventureBundle\Traits\NameTrait;
-
-class CutScene
+trait NameTrait
 {
-    use IdTrait;
-    use NameTrait;
+    private $name;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }

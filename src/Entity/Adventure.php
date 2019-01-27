@@ -11,16 +11,24 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+use Endroid\AdventureBundle\Traits\IdTrait;
+use Endroid\AdventureBundle\Traits\NameTrait;
+
 class Adventure
 {
-    private $name;
+    use IdTrait;
+    use NameTrait;
+
     private $mainCharacters;
     private $otherCharacters;
     private $locations;
     private $items;
 
-    public function __construct(string $name)
+    private $currentCharacter;
+
+    public function __construct(string $id, string $name)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->mainCharacters = [];
         $this->otherCharacters = [];
@@ -28,14 +36,13 @@ class Adventure
         $this->items = [];
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
     public function addMainCharacter(Character $character): void
     {
-        $this->mainCharacters[$character->getName()] = $character;
+        if (!$this->currentCharacter instanceof Character) {
+            $this->currentCharacter = $character;
+        }
+
+        $this->mainCharacters[$character->getId()] = $character;
     }
 
     public function getMainCharacters(): array
@@ -43,9 +50,24 @@ class Adventure
         return $this->mainCharacters;
     }
 
+    public function getMainCharacterById(string $characterId): Character
+    {
+        return $this->mainCharacters[$characterId];
+    }
+
+    public function setCurrentCharacter(Character $character): void
+    {
+        $this->currentCharacter = $character;
+    }
+
+    public function getCurrentCharacter(): Character
+    {
+        return $this->currentCharacter;
+    }
+
     public function addOtherCharacter(Character $character): void
     {
-        $this->otherCharacters[$character->getName()] = $character;
+        $this->otherCharacters[$character->getId()] = $character;
     }
 
     public function getOtherCharacters(): array
@@ -55,9 +77,12 @@ class Adventure
 
     public function addLocation(Location $location): void
     {
-        $this->locations[$location->getName()] = $location;
+        $this->locations[$location->getId()] = $location;
     }
 
+    /**
+     * @return Location[]
+     */
     public function getLocations(): array
     {
         return $this->locations;
@@ -65,9 +90,12 @@ class Adventure
 
     public function addItem(Item $item): void
     {
-        $this->items[$item->getName()] = $item;
+        $this->items[$item->getId()] = $item;
     }
 
+    /**
+     * @return Item[]
+     */
     public function getItems(): array
     {
         return $this->items;

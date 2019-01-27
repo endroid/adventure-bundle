@@ -11,40 +11,39 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Controller;
 
-use Endroid\AdventureBundle\Builder\RandomAdventureBuilder;
-use Symfony\Component\HttpFoundation\Request;
+use Endroid\AdventureBundle\Manager\AdventureManagerInterface;
+use Endroid\AdventureBundle\Message\GetAdventure;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\HandleTrait;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 final class PlayController
 {
-    private $builder;
+    use HandleTrait;
+
+    private $router;
     private $templating;
 
-    public function __construct(RandomAdventureBuilder $builder, Environment $templating)
+    public function __construct(MessageBusInterface $messageBus, RouterInterface $router, Environment $templating)
     {
-        $this->builder = $builder;
+        $this->messageBus = $messageBus;
+        $this->router = $router;
         $this->templating = $templating;
     }
 
     /**
-     * @Route("/play")
+     * @Route("/{adventureId}/play", name="adventure_play")
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(string $adventureId): Response
     {
-        if (!$request->getSession()->has('adventure')) {
-            $adventure = $this->builder
-                ->setMainCharacterCount(4)
-                ->setOtherCharacterCount(20)
-                ->setLocationCount(10)
-                ->setItemCount(20)
-                ->build();
-            $request->getSession()->set('adventure', $adventure);
-        }
+        $getAdventure = new GetAdventure($adventureId);
+        $adventure = $this->handle($getAdventure);
 
         return new Response($this->templating->render('@EndroidAdventure/play.html.twig', [
-            'adventure' => $request->getSession()->get('adventure'),
+            'adventure' => $adventure,
         ]));
     }
 }

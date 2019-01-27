@@ -9,8 +9,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Message\Command;
+namespace Endroid\AdventureBundle\Traits;
 
-class LookAt
+trait IdTrait
 {
+    private $id;
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
 }

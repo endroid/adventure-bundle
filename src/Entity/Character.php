@@ -11,17 +11,25 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+use Endroid\AdventureBundle\Traits\IdTrait;
+use Endroid\AdventureBundle\Traits\NameTrait;
+
 class Character
 {
-    private $name;
+    use IdTrait;
+    use NameTrait;
 
-    public function __construct(string $name)
+    private $location;
+
+    public function __construct(string $id, string $name, Location $location)
     {
+        $this->id = $id;
         $this->name = $name;
+        $this->location = $location;
     }
 
-    public function getName(): string
+    public function getLocation(): Location
     {
-        return $this->name;
+        return $this->location;
     }
 }

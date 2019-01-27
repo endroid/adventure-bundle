@@ -15,7 +15,9 @@ use Endroid\AdventureBundle\Entity\Adventure;
 use Endroid\AdventureBundle\Entity\Character;
 use Endroid\AdventureBundle\Entity\Item;
 use Endroid\AdventureBundle\Entity\Location;
+use Endroid\AdventureBundle\Entity\RandomAdventure;
 use Faker\Factory;
+use Ramsey\Uuid\Uuid;
 
 class RandomAdventureBuilder
 {
@@ -61,28 +63,43 @@ class RandomAdventureBuilder
 
     public function build(): Adventure
     {
-        $adventure = new Adventure($this->faker->city.' '.$this->faker->buildingNumber);
+        $adventure = new RandomAdventure($this->createId(), $this->faker->city.' '.$this->faker->buildingNumber);
+
+        $this->buildLocations($adventure);
 
         for ($i = 0; $i < $this->mainCharacterCount; ++$i) {
-            $mainCharacter = new Character($this->faker->firstName);
+            $mainCharacter = new Character($this->createId(), $this->faker->firstName, $adventure->getRandomLocation());
             $adventure->addMainCharacter($mainCharacter);
         }
 
         for ($i = 0; $i < $this->otherCharacterCount; ++$i) {
-            $otherCharacter = new Character($this->faker->firstName);
+            $otherCharacter = new Character($this->createId(), $this->faker->firstName, $adventure->getRandomLocation());
             $adventure->addOtherCharacter($otherCharacter);
         }
 
-        for ($i = 0; $i < $this->locationCount; $i++) {
-            $location = new Location($this->faker->streetName);
-            $adventure->addLocation($location);
-        }
-
         for ($i = 0; $i < $this->itemCount; $i++) {
-            $item = new Item($this->faker->word);
+            $item = new Item($this->createId(), $this->faker->word);
             $adventure->addItem($item);
         }
 
         return $adventure;
+    }
+
+    private function buildLocations(RandomAdventure $adventure): void
+    {
+        for ($i = 0; $i < $this->locationCount; $i++) {
+            $location = new Location($this->createId(), $this->faker->streetName);
+            $adventure->addLocation($location);
+        }
+
+        $locations = $adventure->getLocations();
+        foreach ($locations as $location) {
+            $location->connectTo($adventure->getRandomLocation($location));
+        }
+    }
+
+    private function createId(): string
+    {
+        return Uuid::uuid4()->toString();
     }
 }

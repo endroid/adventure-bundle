@@ -11,17 +11,17 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+use Endroid\AdventureBundle\Traits\IdTrait;
+use Endroid\AdventureBundle\Traits\NameTrait;
+
 class Item
 {
-    private $name;
+    use IdTrait;
+    use NameTrait;
 
-    public function __construct(string $name)
+    public function __construct(string $id, string $name)
     {
+        $this->id = $id;
         $this->name = $name;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 }

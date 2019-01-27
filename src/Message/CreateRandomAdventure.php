@@ -9,13 +9,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Entity;
+namespace Endroid\AdventureBundle\Message;
 
-use Endroid\AdventureBundle\Traits\IdTrait;
-use Endroid\AdventureBundle\Traits\NameTrait;
-
-class CutScene
+class CreateRandomAdventure
 {
-    use IdTrait;
-    use NameTrait;
+
 }

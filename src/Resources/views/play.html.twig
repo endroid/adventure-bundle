@@ -1,12 +1,14 @@
 {% extends '@EndroidAdventure/layout.html.twig' %}
 
 {% block content %}
+
     <h1>Adventure - {{ adventure.name }}</h1>
-    <button type="button" class="btn btn-primary">Create new adventure</button>
+
+    <a class="btn btn-primary" href="{{ path('adventure_create_random') }}" role="button">Start new adventure</a>
 
     <div class="btn-group">
         {% for mainCharacter in adventure.mainCharacters %}
-            <button type="button" class="btn btn-primary">{{ mainCharacter.name }}</button>
+            <a class="btn btn-{% if mainCharacter == adventure.currentCharacter %}dark{% else %}secondary{% endif %}" href="{{ path('adventure_switch_character', { adventureId: adventure.id, characterId: mainCharacter.id }) }}" role="button">{{ mainCharacter.name }}</a>
         {% endfor %}
     </div>
 
