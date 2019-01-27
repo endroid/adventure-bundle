@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Endroid\AdventureBundle\Controller;
 
 use Endroid\AdventureBundle\Builder\RandomAdventureBuilder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -30,18 +31,20 @@ final class PlayController
     /**
      * @Route("/play")
      */
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
-        $adventure = $this->builder
-            ->setMainCharacterCount(4)
-            ->setOtherCharacterCount(20)
-            ->setLocationCount(10)
-            ->setItemCount(20)
-            ->build()
-        ;
+        if (!$request->getSession()->has('adventure')) {
+            $adventure = $this->builder
+                ->setMainCharacterCount(4)
+                ->setOtherCharacterCount(20)
+                ->setLocationCount(10)
+                ->setItemCount(20)
+                ->build();
+            $request->getSession()->set('adventure', $adventure);
+        }
 
         return new Response($this->templating->render('@EndroidAdventure/play.html.twig', [
-            'adventure' => $adventure,
+            'adventure' => $request->getSession()->get('adventure'),
         ]));
     }
 }
