@@ -40,9 +40,8 @@ final class PlayController
             ->build()
         ;
 
-        dump($adventure);
-        die;
-
-        return new Response($this->templating->render('@EndroidAdventure/adventure.html.twig'));
+        return new Response($this->templating->render('@EndroidAdventure/play.html.twig', [
+            'adventure' => $adventure,
+        ]));
     }
 }

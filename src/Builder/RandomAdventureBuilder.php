@@ -61,15 +61,15 @@ class RandomAdventureBuilder
 
     public function build(): Adventure
     {
-        $adventure = new Adventure($this->faker->domainName);
+        $adventure = new Adventure($this->faker->city.' '.$this->faker->buildingNumber);
 
         for ($i = 0; $i < $this->mainCharacterCount; ++$i) {
-            $mainCharacter = new Character($this->faker->name);
+            $mainCharacter = new Character($this->faker->firstName);
             $adventure->addMainCharacter($mainCharacter);
         }
 
         for ($i = 0; $i < $this->otherCharacterCount; ++$i) {
-            $otherCharacter = new Character($this->faker->name);
+            $otherCharacter = new Character($this->faker->firstName);
             $adventure->addOtherCharacter($otherCharacter);
         }
 

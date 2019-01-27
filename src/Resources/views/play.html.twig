@@ -1,0 +1,12 @@
+{% extends '@EndroidAdventure/layout.html.twig' %}
+
+{% block content %}
+    <h1>Adventure - {{ adventure.name }}</h1>
+
+    <div class="btn-group">
+        {% for mainCharacter in adventure.mainCharacters %}
+            <button type="button" class="btn btn-primary">{{ mainCharacter.name }}</button>
+        {% endfor %}
+    </div>
+
+{% endblock %}
