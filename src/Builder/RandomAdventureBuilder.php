@@ -21,30 +21,16 @@ use Ramsey\Uuid\Uuid;
 
 class RandomAdventureBuilder
 {
-    private $mainCharacterCount;
-    private $otherCharacterCount;
     private $locationCount;
     private $itemCount;
+    private $mainCharacterCount;
+    private $otherCharacterCount;
 
     private $faker;
 
     public function __construct()
     {
         $this->faker = Factory::create('en');
-    }
-
-    public function setMainCharacterCount(int $mainCharacterCount): self
-    {
-        $this->mainCharacterCount = $mainCharacterCount;
-
-        return $this;
-    }
-
-    public function setOtherCharacterCount(int $otherCharacterCount): self
-    {
-        $this->otherCharacterCount = $otherCharacterCount;
-
-        return $this;
     }
 
     public function setLocationCount(int $locationCount): self
@@ -61,26 +47,27 @@ class RandomAdventureBuilder
         return $this;
     }
 
+    public function setMainCharacterCount(int $mainCharacterCount): self
+    {
+        $this->mainCharacterCount = $mainCharacterCount;
+
+        return $this;
+    }
+
+    public function setOtherCharacterCount(int $otherCharacterCount): self
+    {
+        $this->otherCharacterCount = $otherCharacterCount;
+
+        return $this;
+    }
+
     public function build(): Adventure
     {
         $adventure = new RandomAdventure($this->createId(), $this->faker->city.' '.$this->faker->buildingNumber);
 
         $this->buildLocations($adventure);
-
-        for ($i = 0; $i < $this->mainCharacterCount; ++$i) {
-            $mainCharacter = new Character($this->createId(), $this->faker->firstName, $adventure->getRandomLocation());
-            $adventure->addMainCharacter($mainCharacter);
-        }
-
-        for ($i = 0; $i < $this->otherCharacterCount; ++$i) {
-            $otherCharacter = new Character($this->createId(), $this->faker->firstName, $adventure->getRandomLocation());
-            $adventure->addOtherCharacter($otherCharacter);
-        }
-
-        for ($i = 0; $i < $this->itemCount; ++$i) {
-            $item = new Item($this->createId(), $this->faker->word);
-            $adventure->addItem($item);
-        }
+        $this->buildItems($adventure);
+        $this->buildCharacters($adventure);
 
         return $adventure;
     }
@@ -95,6 +82,27 @@ class RandomAdventureBuilder
         $locations = $adventure->getLocations();
         foreach ($locations as $location) {
             $location->connectTo($adventure->getRandomLocation($location));
+        }
+    }
+
+    private function buildItems(RandomAdventure $adventure): void
+    {
+        for ($i = 0; $i < $this->itemCount; ++$i) {
+            $item = new Item($this->createId(), $this->faker->word, $adventure->getRandomLocation());
+            $adventure->addItem($item);
+        }
+    }
+
+    private function buildCharacters(RandomAdventure $adventure): void
+    {
+        for ($i = 0; $i < $this->mainCharacterCount; ++$i) {
+            $mainCharacter = new Character($this->createId(), $this->faker->firstName, $adventure->getRandomLocation());
+            $adventure->addMainCharacter($mainCharacter);
+        }
+
+        for ($i = 0; $i < $this->otherCharacterCount; ++$i) {
+            $otherCharacter = new Character($this->createId(), $this->faker->firstName, $adventure->getRandomLocation());
+            $adventure->addOtherCharacter($otherCharacter);
         }
     }
 
