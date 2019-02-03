@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait IdentifiableTrait
 {
     /**

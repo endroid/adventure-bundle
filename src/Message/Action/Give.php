@@ -9,7 +9,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Message;
+namespace Endroid\AdventureBundle\Message\Action;
 
 use Endroid\AdventureBundle\Entity\CharacterInterface;
 use Endroid\AdventureBundle\Entity\ItemInterface;
