@@ -16,8 +16,22 @@ class Character implements CharacterInterface
     use IdentifiableTrait;
     use InteractiveTrait;
 
+    private $items;
+    private $location;
+
     public function __construct(string $id, string $name)
     {
         $this->setIdentification($id, $name);
+        $this->items = [];
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function getItems(): array
+    {
+        return $this->items;
     }
 }

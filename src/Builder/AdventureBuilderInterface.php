@@ -9,8 +9,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Message;
+namespace Endroid\AdventureBundle\Builder;
 
-class CreateRandomAdventure
+use Endroid\AdventureBundle\Entity\AdventureInterface;
+
+interface AdventureBuilderInterface
 {
+    function build(): AdventureInterface;
 }

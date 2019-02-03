@@ -1,0 +1,13 @@
+locations:
+  garden:
+    name: Garden
+  hall:
+    name: Hall
+  living:
+    name: Living
+  attic:
+    name: Attic
+  basement:
+    name: Basement
+  roof:
+    name: Roof

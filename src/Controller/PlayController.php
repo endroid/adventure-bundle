@@ -37,6 +37,10 @@ final class PlayController
      */
     public function __invoke(string $adventureId): Response
     {
+        if ($adventureId === 'demo') {
+
+        }
+
         $getAdventure = new GetAdventure($adventureId);
         $adventure = $this->messageBus->dispatch($getAdventure);
 

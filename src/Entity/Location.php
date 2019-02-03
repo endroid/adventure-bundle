@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="location")
+ */
 class Location
 {
     use IdentifiableTrait;
@@ -19,19 +23,6 @@ class Location
 
     public function __construct(string $id, string $name)
     {
-        $this->id = $id;
-        $this->name = $name;
-
-        $this->connectedLocations = [];
-    }
-
-    public function connectTo(Location $location): void
-    {
-        if (isset($this->connectedLocations[$location->getId()])) {
-            return;
-        }
-
-        $this->connectedLocations[$location->getId()] = $location;
-        $location->connectTo($this);
+        $this->setIdentification($id, $name);
     }
 }

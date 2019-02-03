@@ -13,7 +13,15 @@ namespace Endroid\AdventureBundle\Entity;
 
 trait IdentifiableTrait
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="string")
+     */
     private $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     private $name;
 
     private function setIdentification(string $id, string $name)
