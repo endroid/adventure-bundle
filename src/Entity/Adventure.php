@@ -11,13 +11,9 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
-use Endroid\AdventureBundle\Traits\IdTrait;
-use Endroid\AdventureBundle\Traits\NameTrait;
-
-class Adventure
+class Adventure implements AdventureInterface
 {
-    use IdTrait;
-    use NameTrait;
+    use IdentifiableTrait;
 
     private $mainCharacters;
     private $otherCharacters;
@@ -28,8 +24,8 @@ class Adventure
 
     public function __construct(string $id, string $name)
     {
-        $this->id = $id;
-        $this->name = $name;
+        $this->setIdentification($id, $name);
+
         $this->mainCharacters = [];
         $this->otherCharacters = [];
         $this->locations = [];

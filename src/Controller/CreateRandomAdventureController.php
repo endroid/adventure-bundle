@@ -12,21 +12,26 @@ declare(strict_types=1);
 namespace Endroid\AdventureBundle\Controller;
 
 use Endroid\AdventureBundle\Message\CreateRandomAdventure;
+use Endroid\AdventureBundle\Uuid\UuidGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 final class CreateRandomAdventureController
 {
-    use HandleTrait;
-
+    private $uuidGenerator;
+    private $messageBus;
     private $router;
 
-    public function __construct(MessageBusInterface $messageBus, RouterInterface $router)
+    public function __construct(
+        UuidGeneratorInterface $uuidGenerator,
+        MessageBusInterface $messageBus,
+        RouterInterface $router
+    )
     {
+        $this->uuidGenerator = $uuidGenerator;
         $this->messageBus = $messageBus;
         $this->router = $router;
     }
@@ -36,11 +41,13 @@ final class CreateRandomAdventureController
      */
     public function __invoke(): Response
     {
-        $createRandomAdventure = new CreateRandomAdventure();
-        $adventure = $this->handle($createRandomAdventure);
+        $adventureId = $this->uuidGenerator->generate();
+
+        $createRandomAdventure = new CreateRandomAdventure($adventureId);
+        $this->messageBus->dispatch($createRandomAdventure);
 
         return new RedirectResponse($this->router->generate('adventure_play', [
-            'adventureId' => $adventure->getId(),
+            'adventureId' => $adventureId,
         ]));
     }
 }

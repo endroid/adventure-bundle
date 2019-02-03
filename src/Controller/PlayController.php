@@ -21,8 +21,7 @@ use Twig\Environment;
 
 final class PlayController
 {
-    use HandleTrait;
-
+    private $messageBus;
     private $router;
     private $templating;
 
@@ -39,7 +38,7 @@ final class PlayController
     public function __invoke(string $adventureId): Response
     {
         $getAdventure = new GetAdventure($adventureId);
-        $adventure = $this->handle($getAdventure);
+        $adventure = $this->messageBus->dispatch($getAdventure);
 
         return new Response($this->templating->render('@EndroidAdventure/play.html.twig', [
             'adventure' => $adventure,

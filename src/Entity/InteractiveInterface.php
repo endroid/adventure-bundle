@@ -9,14 +9,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Traits;
+namespace Endroid\AdventureBundle\Entity;
 
-trait NameTrait
+interface InteractiveInterface
 {
-    private $name;
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    
 }

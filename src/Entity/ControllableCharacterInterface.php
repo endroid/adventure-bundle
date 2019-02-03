@@ -11,13 +11,7 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
-class Character implements CharacterInterface
+interface ControllableCharacterInterface extends CharacterInterface
 {
-    use IdentifiableTrait;
-    use InteractiveTrait;
-
-    public function __construct(string $id, string $name)
-    {
-        $this->setIdentification($id, $name);
-    }
+    
 }

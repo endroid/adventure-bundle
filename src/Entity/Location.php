@@ -11,13 +11,9 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
-use Endroid\AdventureBundle\Traits\IdTrait;
-use Endroid\AdventureBundle\Traits\NameTrait;
-
 class Location
 {
-    use IdTrait;
-    use NameTrait;
+    use IdentifiableTrait;
 
     private $connectedLocations;
 

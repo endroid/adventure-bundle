@@ -9,14 +9,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Traits;
+namespace Endroid\AdventureBundle\Uuid;
 
-trait IdTrait
+interface UuidGeneratorInterface
 {
-    private $id;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
+    public function generate(): string;
 }

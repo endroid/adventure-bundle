@@ -14,15 +14,13 @@ namespace Endroid\AdventureBundle\Controller;
 use Endroid\AdventureBundle\Message\SwitchCharacter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 final class SwitchCharacterController
 {
-    use HandleTrait;
-
+    private $messageBus;
     private $router;
 
     public function __construct(MessageBusInterface $messageBus, RouterInterface $router)
@@ -37,7 +35,7 @@ final class SwitchCharacterController
     public function __invoke(string $adventureId, string $characterId): Response
     {
         $switchCharacter = new SwitchCharacter($adventureId, $characterId);
-        $this->handle($switchCharacter);
+        $this->messageBus->dispatch($switchCharacter);
 
         return new RedirectResponse($this->router->generate('adventure_play', [
             'adventureId' => $adventureId,
