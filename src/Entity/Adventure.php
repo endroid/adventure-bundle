@@ -11,14 +11,24 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="adventure")
+ */
 class Adventure implements AdventureInterface
 {
     use IdentifiableTrait;
 
-    private $mainCharacters;
-    private $otherCharacters;
+    /**
+     * @ORM\OneToMany(targetEntity="Endroid\AdventureBundle\Entity\Location", mappedBy="adventure")
+     */
     private $locations;
+
     private $items;
+    private $controllableCharacters;
+    private $otherCharacters;
 
     private $currentCharacter;
 
@@ -26,74 +36,15 @@ class Adventure implements AdventureInterface
     {
         $this->setIdentification($id, $name);
 
-        $this->mainCharacters = [];
-        $this->otherCharacters = [];
         $this->locations = [];
         $this->items = [];
-    }
-
-    public function addMainCharacter(Character $character): void
-    {
-        if (!$this->currentCharacter instanceof Character) {
-            $this->currentCharacter = $character;
-        }
-
-        $this->mainCharacters[$character->getId()] = $character;
-    }
-
-    public function getMainCharacters(): array
-    {
-        return $this->mainCharacters;
-    }
-
-    public function getMainCharacterById(string $characterId): Character
-    {
-        return $this->mainCharacters[$characterId];
-    }
-
-    public function setCurrentCharacter(Character $character): void
-    {
-        $this->currentCharacter = $character;
-    }
-
-    public function getCurrentCharacter(): Character
-    {
-        return $this->currentCharacter;
-    }
-
-    public function addOtherCharacter(Character $character): void
-    {
-        $this->otherCharacters[$character->getId()] = $character;
-    }
-
-    public function getOtherCharacters(): array
-    {
-        return $this->otherCharacters;
+        $this->controllableCharacters = [];
+        $this->otherCharacters = [];
     }
 
     public function addLocation(Location $location): void
     {
         $this->locations[$location->getId()] = $location;
-    }
-
-    /**
-     * @return Location[]
-     */
-    public function getLocations(): array
-    {
-        return $this->locations;
-    }
-
-    public function addItem(Item $item): void
-    {
-        $this->items[$item->getId()] = $item;
-    }
-
-    /**
-     * @return Item[]
-     */
-    public function getItems(): array
-    {
-        return $this->items;
+        $location->setAdventure($this);
     }
 }

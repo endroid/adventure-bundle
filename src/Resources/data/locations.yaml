@@ -5,9 +5,9 @@ locations:
     name: Hall
   living:
     name: Living
-  attic:
-    name: Attic
   basement:
     name: Basement
+  attic:
+    name: Attic
   roof:
     name: Roof

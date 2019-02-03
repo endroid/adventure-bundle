@@ -15,16 +15,24 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="location")
+ * @ORM\Table(name="adventure_location")
  */
-class Location
+class Location implements IdentifiableInterface
 {
     use IdentifiableTrait;
 
-    private $connectedLocations;
+    /**
+     * @ORM\ManyToOne(targetEntity="Endroid\AdventureBundle\Entity\Adventure", inversedBy="locations")
+     */
+    private $adventure;
 
     public function __construct(string $id, string $name)
     {
         $this->setIdentification($id, $name);
+    }
+
+    public function setAdventure(AdventureInterface $adventure): void
+    {
+        $this->adventure = $adventure;
     }
 }
