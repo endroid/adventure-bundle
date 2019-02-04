@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Exception;
 
-class AdventureNotFoundException extends AdventureException
+class InvalidPathException extends AdventureException
 {
-    public static function createForId(string $id): AdventureNotFoundException
+    public static function createForPath(string $path): InvalidPathException
     {
-        return new self(sprintf('Adventure with id "%s" not found', $id));
+        return new self(sprintf('Path "%s" does not exist', $path));
     }
 }

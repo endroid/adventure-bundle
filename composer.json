@@ -13,12 +13,13 @@
     ],
     "require": {
         "php": ">=7.1",
-        "twig/twig": "^2.4",
         "doctrine/doctrine-bundle": "^1.8.1",
         "doctrine/orm": "^2.6",
         "ramsey/uuid": "^3.8",
         "symfony/asset": "^4.2",
-        "symfony/messenger": "^4.2"
+        "symfony/messenger": "^4.2",
+        "symfony/yaml": "^4.2",
+        "twig/twig": "^2.4"
     },
     "config": {
         "sort-packages": true
