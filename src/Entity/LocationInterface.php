@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
-interface CharacterInterface extends IdentifiableInterface, InteractiveInterface, ItemContainerInterface
+interface LocationInterface extends IdentifiableInterface, ItemContainerInterface
 {
-    
+
 }

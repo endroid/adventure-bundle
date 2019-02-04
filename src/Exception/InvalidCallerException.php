@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Exception;
 
-class InvalidPathException extends AdventureException
+class InvalidCallerException extends AdventureException
 {
-    public static function createForPath(string $path): self
+    public static function create(string $function, string $caller): self
     {
-        return new self(sprintf('Path "%s" does not exist', $path));
+        return new self(sprintf('Function "%s" should be called by caller "%s"', $function, $caller));
     }
 }

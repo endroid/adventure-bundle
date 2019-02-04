@@ -11,28 +11,13 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="adventure_location")
- */
-class Location implements IdentifiableInterface
+class Location implements LocationInterface
 {
     use IdentifiableTrait;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Endroid\AdventureBundle\Entity\Adventure", inversedBy="locations")
-     */
-    private $adventure;
+    use ItemContainerTrait;
 
     public function __construct(string $id, string $name)
     {
         $this->setIdentification($id, $name);
-    }
-
-    public function setAdventure(AdventureInterface $adventure): void
-    {
-        $this->adventure = $adventure;
     }
 }

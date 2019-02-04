@@ -1,9 +1,13 @@
 other_characters:
   hugo:
     name: Hugo
+    location: garden
   lucia:
     name: Lucia
+    location: hall
   sofia:
     name: Sofia
+    location: attic
   noah:
     name: Noah
+    location: roof

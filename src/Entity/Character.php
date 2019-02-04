@@ -15,8 +15,8 @@ class Character implements CharacterInterface
 {
     use IdentifiableTrait;
     use InteractiveTrait;
+    use ItemContainerTrait;
 
-    private $items;
     private $location;
 
     public function __construct(string $id, string $name)
@@ -25,13 +25,13 @@ class Character implements CharacterInterface
         $this->items = [];
     }
 
-    public function getLocation(): ?Location
+    public function setLocation(?LocationInterface $location): void
     {
-        return $this->location;
+        $this->location = $location;
     }
 
-    public function getItems(): array
+    public function getLocation(): ?LocationInterface
     {
-        return $this->items;
+        return $this->location;
     }
 }

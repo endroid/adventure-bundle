@@ -29,8 +29,11 @@ class CreateDemoAdventureHandler implements MessageHandlerInterface
 
     public function __invoke(CreateDemoAdventure $message)
     {
-        $yamlBuilder = new YamlAdventureBuilder($this->builder);
+        $yamlBuilder = new YamlAdventureBuilder();
         $adventure = $yamlBuilder->build();
+
+        dump($adventure);
+        die;
 
         $this->manager->add($adventure);
 

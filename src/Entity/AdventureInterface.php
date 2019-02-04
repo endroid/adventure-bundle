@@ -13,5 +13,7 @@ namespace Endroid\AdventureBundle\Entity;
 
 interface AdventureInterface extends IdentifiableInterface
 {
-    function addLocation(Location $location): void;
+    function addLocation(LocationInterface $location): void;
+    function addControllableCharacter(CharacterInterface $character): void;
+    function addOtherCharacter(CharacterInterface $character): void;
 }

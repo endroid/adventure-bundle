@@ -1,4 +1,7 @@
 items:
   door:
     name: door
-    location: garden
+    item_container: garden
+  key:
+    name: key
+    item_container: garden
