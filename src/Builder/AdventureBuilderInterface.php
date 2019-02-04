@@ -15,5 +15,5 @@ use Endroid\AdventureBundle\Entity\AdventureInterface;
 
 interface AdventureBuilderInterface
 {
-    function build(): AdventureInterface;
+    public function build(): AdventureInterface;
 }

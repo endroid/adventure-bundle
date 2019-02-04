@@ -13,5 +13,4 @@ namespace Endroid\AdventureBundle\Entity;
 
 interface LocationInterface extends IdentifiableInterface, ItemContainerInterface
 {
-
 }

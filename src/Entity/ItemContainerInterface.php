@@ -14,8 +14,12 @@ namespace Endroid\AdventureBundle\Entity;
 interface ItemContainerInterface
 {
     public function addItem(ItemInterface $item): void;
+
     public function removeItem(string $id): void;
+
     public function hasItem(string $id): bool;
+
     public function getItem(string $id): ItemInterface;
+
     public function getItems(): array;
 }

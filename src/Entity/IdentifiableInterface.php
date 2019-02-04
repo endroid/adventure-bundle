@@ -13,6 +13,7 @@ namespace Endroid\AdventureBundle\Entity;
 
 interface IdentifiableInterface
 {
-    function getId(): string;
-    function getName(): string;
+    public function getId(): string;
+
+    public function getName(): string;
 }

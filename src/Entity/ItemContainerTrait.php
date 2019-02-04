@@ -19,7 +19,7 @@ trait ItemContainerTrait
 
     /**
      * Should only be called from item interface setItemContainer
-     * This to ensure that items have only one single container
+     * This to ensure that items have only one single container.
      */
     public function addItem(ItemInterface $item): void
     {
@@ -30,7 +30,7 @@ trait ItemContainerTrait
 
     /**
      * Should only be called from item interface setItemContainer
-     * This to ensure that items have only one single container
+     * This to ensure that items have only one single container.
      */
     public function removeItem(string $id): void
     {

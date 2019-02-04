@@ -29,10 +29,10 @@ class Adventure implements AdventureInterface
     {
         $this->locations[$location->getId()] = $location;
     }
-    
+
     public function addControllableCharacter(CharacterInterface $character): void
     {
-        if (count($this->controllableCharacters) === 0) {
+        if (0 === count($this->controllableCharacters)) {
             $this->currentCharacter = $character;
         }
 

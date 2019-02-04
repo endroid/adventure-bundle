@@ -22,8 +22,7 @@ class Give
     public function __construct(
         ItemInterface $item,
         CharacterInterface $character
-    )
-    {
+    ) {
         $this->item = $item;
         $this->character = $character;
     }

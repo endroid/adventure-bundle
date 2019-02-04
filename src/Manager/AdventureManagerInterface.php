@@ -15,6 +15,7 @@ use Endroid\AdventureBundle\Entity\AdventureInterface;
 
 interface AdventureManagerInterface
 {
-    function add(AdventureInterface $adventure): void;
-    function get(string $id): AdventureInterface;
+    public function add(AdventureInterface $adventure): void;
+
+    public function get(string $id): AdventureInterface;
 }

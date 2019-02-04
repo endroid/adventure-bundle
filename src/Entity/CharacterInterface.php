@@ -13,5 +13,4 @@ namespace Endroid\AdventureBundle\Entity;
 
 interface CharacterInterface extends IdentifiableInterface, InteractiveInterface, ItemContainerInterface
 {
-    
 }

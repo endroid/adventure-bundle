@@ -26,8 +26,7 @@ final class CreateDemoAdventureController
     public function __construct(
         MessageBusInterface $messageBus,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->messageBus = $messageBus;
         $this->router = $router;
     }
