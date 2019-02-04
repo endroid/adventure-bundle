@@ -22,7 +22,6 @@ class Character implements CharacterInterface
     public function __construct(string $id, string $name)
     {
         $this->setIdentification($id, $name);
-        $this->items = [];
     }
 
     public function setLocation(?LocationInterface $location): void

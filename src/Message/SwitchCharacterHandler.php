@@ -27,7 +27,7 @@ class SwitchCharacterHandler implements MessageHandlerInterface
     {
         $adventure = $this->adventureManager->get($message->getAdventureId());
 
-        $character = $adventure->getMainCharacterById($message->getCharacterId());
+        $character = $adventure->getControllableCharacter($message->getCharacterId());
         $adventure->setCurrentCharacter($character);
     }
 }

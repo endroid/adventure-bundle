@@ -32,9 +32,6 @@ class CreateDemoAdventureHandler implements MessageHandlerInterface
         $yamlBuilder = new YamlAdventureBuilder();
         $adventure = $yamlBuilder->build();
 
-        dump($adventure);
-        die;
-
         $this->manager->add($adventure);
 
         return $adventure;

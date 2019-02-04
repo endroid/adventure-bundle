@@ -4,11 +4,19 @@
 
     <h1>Adventure - {{ adventure.name }}</h1>
 
-    <a class="btn btn-primary" href="{{ path('adventure_create_random') }}" role="button">Start new adventure</a>
+    <div class="alert alert-primary" role="alert">
+        Character {{ adventure.currentCharacter }} at {{ adventure.currentCharacter.location }}
+    </div>
+
+    <div class="alert alert-success" role="alert">
+        Items: {% for item in adventure.currentCharacter.location.items %} {{ item }}{% else %}none{% endfor %}
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('adventure_create_demo') }}" role="button">Start new adventure</a>
 
     <div class="btn-group">
-        {% for mainCharacter in adventure.mainCharacters %}
-            <a class="btn btn-{% if mainCharacter == adventure.currentCharacter %}dark{% else %}secondary{% endif %}" href="{{ path('adventure_switch_character', { adventureId: adventure.id, characterId: mainCharacter.id }) }}" role="button">{{ mainCharacter.name }}</a>
+        {% for controllableCharacter in adventure.controllableCharacters %}
+            <a class="btn btn-{% if controllableCharacter == adventure.currentCharacter %}dark{% else %}secondary{% endif %}" href="{{ path('adventure_switch_character', { adventureId: adventure.id, characterId: controllableCharacter.id }) }}" role="button">{{ controllableCharacter.name }}</a>
         {% endfor %}
     </div>
 

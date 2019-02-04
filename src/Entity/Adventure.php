@@ -18,7 +18,6 @@ class Adventure implements AdventureInterface
     private $locations = [];
     private $controllableCharacters = [];
     private $otherCharacters = [];
-
     private $currentCharacter;
 
     public function __construct(string $id, string $name)
@@ -33,11 +32,35 @@ class Adventure implements AdventureInterface
     
     public function addControllableCharacter(CharacterInterface $character): void
     {
+        if (count($this->controllableCharacters) === 0) {
+            $this->currentCharacter = $character;
+        }
+
         $this->controllableCharacters[$character->getId()] = $character;
+    }
+
+    public function getControllableCharacter(string $id): CharacterInterface
+    {
+        return $this->controllableCharacters[$id];
+    }
+
+    public function getControllableCharacters(): array
+    {
+        return $this->controllableCharacters;
     }
 
     public function addOtherCharacter(CharacterInterface $character): void
     {
         $this->otherCharacters[$character->getId()] = $character;
+    }
+
+    public function setCurrentCharacter(CharacterInterface $character): void
+    {
+        $this->currentCharacter = $character;
+    }
+
+    public function getCurrentCharacter(): CharacterInterface
+    {
+        return $this->currentCharacter;
     }
 }

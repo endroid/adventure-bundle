@@ -33,7 +33,7 @@ final class CreateDemoAdventureController
     }
 
     /**
-     * @Route("/create-demo", name="adventure_create")
+     * @Route("/create-demo", name="adventure_create_demo")
      */
     public function __invoke(): Response
     {
