@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>Adventure - {{ adventure.name }}</h1>
+    <h1>{{ adventure.name }}</h1>
 
     <div class="alert alert-primary" role="alert">
         Character {{ adventure.currentCharacter }} at {{ adventure.currentCharacter.location }}
@@ -12,7 +12,8 @@
         Items: {% for item in adventure.currentCharacter.location.items %} {{ item }}{% else %}none{% endfor %}
     </div>
 
-    <a class="btn btn-primary" href="{{ path('adventure_create_demo') }}" role="button">Start new adventure</a>
+    <a class="btn btn-primary" href="{{ path('adventure_create', { id: 'thimbleweed-park' }) }}" role="button">Thimbleweed Park</a>
+    <a class="btn btn-primary" href="{{ path('adventure_create', { id: 'day-of-the-tentacle' }) }}" role="button">Day of the Tentacle</a>
 
     <div class="btn-group">
         {% for controllableCharacter in adventure.controllableCharacters %}

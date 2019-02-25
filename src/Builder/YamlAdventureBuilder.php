@@ -26,7 +26,6 @@ class YamlAdventureBuilder implements AdventureBuilderInterface
 
     public function __construct()
     {
-        $this->setPath(__DIR__.'/../Resources/data');
         $this->references = [];
     }
 
@@ -46,9 +45,11 @@ class YamlAdventureBuilder implements AdventureBuilderInterface
         return $yaml[$name];
     }
 
-    public function build(): AdventureInterface
+    public function build(string $id): AdventureInterface
     {
-        $adventure = $this->createAdventure();
+        $this->setPath(__DIR__.'/../Resources/data/'.$id);
+
+        $adventure = $this->createAdventure($id);
         $this->createLocations($adventure);
         $this->createItems($adventure);
         $this->createControllableCharacters($adventure);
@@ -57,11 +58,11 @@ class YamlAdventureBuilder implements AdventureBuilderInterface
         return $adventure;
     }
 
-    private function createAdventure(): AdventureInterface
+    private function createAdventure(string $id): AdventureInterface
     {
         $adventureData = $this->loadYaml('adventure');
 
-        $adventure = new Adventure($adventureData['id'], $adventureData['name']);
+        $adventure = new Adventure($id, $adventureData['name']);
 
         return $adventure;
     }

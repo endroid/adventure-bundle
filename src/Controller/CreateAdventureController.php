@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Controller;
 
-use Endroid\AdventureBundle\Message\CreateDemoAdventure;
+use Endroid\AdventureBundle\Message\CreateAdventure;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
-final class CreateDemoAdventureController
+final class CreateAdventureController
 {
     private $messageBus;
     private $router;
@@ -32,15 +32,15 @@ final class CreateDemoAdventureController
     }
 
     /**
-     * @Route("/create-demo", name="adventure_create_demo")
+     * @Route("/create/{id}", name="adventure_create")
      */
-    public function __invoke(): Response
+    public function __invoke(string $id): Response
     {
-        $createRandomAdventure = new CreateDemoAdventure();
-        $this->messageBus->dispatch($createRandomAdventure);
+        $createAdventure = new CreateAdventure($id);
+        $this->messageBus->dispatch($createAdventure);
 
         return new RedirectResponse($this->router->generate('adventure_play', [
-            'adventureId' => 'demo',
+            'adventureId' => $id,
         ]));
     }
 }

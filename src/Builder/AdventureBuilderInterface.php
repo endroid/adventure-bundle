@@ -15,5 +15,5 @@ use Endroid\AdventureBundle\Entity\AdventureInterface;
 
 interface AdventureBuilderInterface
 {
-    public function build(): AdventureInterface;
+    public function build(string $id): AdventureInterface;
 }

@@ -1,0 +1,4 @@
+controllable_characters:
+  bernard:
+    name: Bernard
+    location: hall

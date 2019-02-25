@@ -9,26 +9,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Message;
+namespace Endroid\AdventureBundle\Command;
 
-class SwitchCharacter
+class GetAdventureCommand
 {
     private $adventureId;
-    private $characterId;
 
-    public function __construct(string $adventureId, string $characterId)
+    public function __construct(string $adventureId)
     {
         $this->adventureId = $adventureId;
-        $this->characterId = $characterId;
     }
 
     public function getAdventureId()
     {
         return $this->adventureId;
-    }
-
-    public function getCharacterId()
-    {
-        return $this->characterId;
     }
 }
