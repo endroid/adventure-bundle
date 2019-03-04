@@ -16,6 +16,7 @@
         "doctrine/doctrine-bundle": "^1.8.1",
         "doctrine/orm": "^2.6",
         "ramsey/uuid": "^3.8",
+        "ramsey/uuid-doctrine": "^1.5",
         "symfony/asset": "^4.2",
         "symfony/messenger": "^4.2",
         "symfony/yaml": "^4.2",

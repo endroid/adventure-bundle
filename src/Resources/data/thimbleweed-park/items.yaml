@@ -1,7 +1,0 @@
-items:
-  door:
-    name: door
-    item_container: garden
-  key:
-    name: key
-    item_container: garden

@@ -84,7 +84,7 @@ class YamlAdventureBuilder implements AdventureBuilderInterface
 
         foreach ($yaml as $itemKey => $itemData) {
             $item = new Item($itemKey, $itemData['name']);
-            $item->setItemContainer($this->getReference($itemData['item_container']));
+            $item->setItemContainer($this->getReference($itemData['location']));
             $this->setReference($itemKey, $item);
         }
     }

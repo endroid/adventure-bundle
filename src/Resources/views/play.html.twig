@@ -12,8 +12,7 @@
         Items: {% for item in adventure.currentCharacter.location.items %} {{ item }}{% else %}none{% endfor %}
     </div>
 
-    <a class="btn btn-primary" href="{{ path('adventure_create', { id: 'thimbleweed-park' }) }}" role="button">Thimbleweed Park</a>
-    <a class="btn btn-primary" href="{{ path('adventure_create', { id: 'day-of-the-tentacle' }) }}" role="button">Day of the Tentacle</a>
+    {{ render(controller('App\\Controller\\CreateController')) }}
 
     <div class="btn-group">
         {% for controllableCharacter in adventure.controllableCharacters %}

@@ -1,0 +1,7 @@
+items:
+  door:
+    name: door
+    location: garden
+  key:
+    name: key
+    location: garden

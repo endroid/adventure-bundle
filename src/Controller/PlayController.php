@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Controller;
 
-use Endroid\AdventureBundle\Message\GetAdventure;
+use Endroid\AdventureBundle\Domain\Query\GetAdventureQuery;
+use Endroid\AdventureBundle\Exception\AdventureNotFoundException;
+use Endroid\AdventureBundle\Query\GetAdventure;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -19,30 +22,35 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
-final class PlayController
+class PlayController
 {
-    use HandleTrait;
-
+    private $queryBus;
     private $router;
     private $templating;
 
-    public function __construct(MessageBusInterface $messageBus, RouterInterface $router, Environment $templating)
+    public function __construct(MessageBusInterface $queryBus, RouterInterface $router, Environment $templating)
     {
-        $this->messageBus = $messageBus;
+        $this->queryBus = $queryBus;
         $this->router = $router;
         $this->templating = $templating;
     }
 
     /**
-     * @Route("/{adventureId}/play", name="adventure_play")
+     * @Route("/{adventureId}", name="adventure_play")
      */
     public function __invoke(string $adventureId): Response
     {
-        $getAdventure = new GetAdventure($adventureId);
-        $adventure = $this->handle($getAdventure);
+        try {
+            $getAdventureCommand = new GetAdventureQuery($adventureId);
+            $envelope = $this->queryBus->dispatch($getAdventureCommand);
+            dump($envelope);
+            die;
+        } catch (AdventureNotFoundException $exception) {
+            return new RedirectResponse($this->router->generate('adventure_create', ['adventureId' => $adventureId]));
+        }
 
         return new Response($this->templating->render('@EndroidAdventure/play.html.twig', [
-            'adventure' => $adventure,
+            'adventure' => $adventure
         ]));
     }
 }

@@ -44,4 +44,9 @@ class SessionAdventureManager implements AdventureManagerInterface
 
         return $adventure;
     }
+
+    public function getAll(): iterable
+    {
+        return [];
+    }
 }
