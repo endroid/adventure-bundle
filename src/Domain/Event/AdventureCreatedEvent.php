@@ -13,5 +13,4 @@ namespace Endroid\AdventureBundle\Domain\Event;
 
 class AdventureCreatedEvent
 {
-
 }

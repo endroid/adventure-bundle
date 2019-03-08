@@ -13,5 +13,4 @@ namespace Endroid\AdventureBundle\Domain\Query;
 
 class GetAdventuresQuery
 {
-
 }

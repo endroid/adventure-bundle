@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Endroid\AdventureBundle\Controller;
 
 use Endroid\AdventureBundle\Command\SwitchCharacterCommand;
-use Endroid\AdventureBundle\Message\SwitchCharacter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;

@@ -32,7 +32,7 @@ class CreateController
         AdventureRepository $adventureRepository,
         RouterInterface $router,
         Environment $templating
-    ){
+    ) {
         $this->commandBus = $commandBus;
         $this->adventureRepository = $adventureRepository;
         $this->router = $router;
