@@ -12,15 +12,19 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "doctrine/doctrine-bundle": "^1.8.1",
         "doctrine/orm": "^2.6",
+        "endroid/installer": "^1.1",
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
         "symfony/asset": "^4.2",
         "symfony/messenger": "^4.2",
         "symfony/yaml": "^4.2",
         "twig/twig": "^2.4"
+    },
+    "require-dev": {
+        "endroid/test": "dev-master"
     },
     "config": {
         "sort-packages": true
