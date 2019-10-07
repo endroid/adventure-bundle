@@ -1,0 +1,19 @@
+language: php
+
+addons:
+  chrome: stable
+
+php:
+  - '7.2'
+  - '7.3'
+  - '7.4snapshot'
+
+matrix:
+  fast_finish: true
+
+script:
+  - vendor/bin/bundle-test
+
+notifications:
+  email:
+    - info@endroid.nl
