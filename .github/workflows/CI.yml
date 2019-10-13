@@ -14,4 +14,4 @@ jobs:
       run: |
         curl -sS https://getcomposer.org/installer | php -- --filename=composer
         composer install --no-interaction --prefer-source
-        vendor/bin/bundle-test
+        vendor/bin/test
