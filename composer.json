@@ -18,9 +18,9 @@
         "endroid/installer": "^1.1",
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
-        "symfony/asset": "^4.2",
-        "symfony/messenger": "^4.2",
-        "symfony/yaml": "^4.2",
+        "symfony/asset": "^4.2||^5.0",
+        "symfony/messenger": "^4.2||^5.0",
+        "symfony/yaml": "^4.2||^5.0",
         "twig/twig": "^2.4"
     },
     "require-dev": {
