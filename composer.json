@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=7.2",
-        "doctrine/doctrine-bundle": "^1.8.1",
+        "doctrine/doctrine-bundle": "^1.8.1||^2.0",
         "doctrine/orm": "^2.6",
         "endroid/installer": "^1.1",
         "ramsey/uuid": "^3.8",
