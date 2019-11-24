@@ -16,7 +16,7 @@ use Endroid\AdventureBundle\Domain\Entity\Adventure;
 
 class AdventureRepository extends AbstractRepository
 {
-    public function __construct(ManagerRegistry $registry, $entityClass)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Adventure::class);
     }
