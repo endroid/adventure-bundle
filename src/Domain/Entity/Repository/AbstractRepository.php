@@ -7,17 +7,9 @@ namespace Endroid\AdventureBundle\Domain\Entity\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 abstract class AbstractRepository extends ServiceEntityRepository
 {
-    protected $className;
-
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, $this->className);
-    }
-
     public function save($entity, $flush = true): void
     {
         $this->getEntityManager()->persist($entity);
