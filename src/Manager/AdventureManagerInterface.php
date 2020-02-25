@@ -17,7 +17,7 @@ interface AdventureManagerInterface
 {
     public function add(Adventure $adventure): void;
 
-    public function get(string $id): AdventureInterface;
+    public function get(string $id): Adventure;
 
     public function getAll(): iterable;
 }

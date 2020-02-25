@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Controller;
 
-use Endroid\AdventureBundle\Domain\Query\GetAdventureQuery;
+use Endroid\AdventureBundle\Query\GetAdventureQuery;
 use Endroid\AdventureBundle\Exception\AdventureNotFoundException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
