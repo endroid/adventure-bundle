@@ -29,7 +29,6 @@ class CreateController
 
     public function __construct(
         MessageBusInterface $commandBus,
-        AdventureRepository $adventureRepository,
         RouterInterface $router,
         Environment $templating
     ) {

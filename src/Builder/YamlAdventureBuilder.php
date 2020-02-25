@@ -12,114 +12,55 @@ declare(strict_types=1);
 namespace Endroid\AdventureBundle\Builder;
 
 use Endroid\AdventureBundle\Entity\Adventure;
-use Endroid\AdventureBundle\Entity\AdventureInterface;
 use Endroid\AdventureBundle\Entity\Character;
-use Endroid\AdventureBundle\Entity\Item;
 use Endroid\AdventureBundle\Entity\Location;
-use Endroid\AdventureBundle\Exception\InvalidPathException;
 use Symfony\Component\Yaml\Yaml;
 
 class YamlAdventureBuilder implements AdventureBuilderInterface
 {
-    private $path;
-    private $references;
+    private $basePath = __DIR__.'/../Resources/data';
 
-    public function __construct()
+    public function build(string $id): Adventure
     {
-        $this->references = [];
+        $locations = $this->createLocations($id);
+        $characters = $this->createCharacters($id);
+
+        $adventureData = $this->loadYaml($id, 'adventure');
+
+        return new Adventure(
+            $id,
+            $adventureData['name'],
+            $characters,
+            $locations
+        );
     }
 
-    public function setPath(string $path): void
+    private function createLocations(string $adventureId): array
     {
-        if (!is_dir($path)) {
-            throw InvalidPathException::createForPath($path);
+        $data = $this->loadYaml($adventureId, 'locations');
+
+        $locations = [];
+        foreach ($data as $id => $locationData) {
+            $locations[] = new Location($id, $locationData['name']);
         }
 
-        $this->path = realpath($path);
+        return $locations;
     }
 
-    private function loadYaml(string $name): array
+    private function createCharacters(string $adventureId): array
     {
-        $yaml = Yaml::parse(strval(file_get_contents($this->path.DIRECTORY_SEPARATOR.$name.'.yaml')));
+        $data = $this->loadYaml($adventureId, 'characters');
 
-        return $yaml[$name];
-    }
-
-    public function build(string $id): AdventureInterface
-    {
-        $this->setPath(__DIR__.'/../Resources/data/'.$id);
-
-        $adventure = $this->createAdventure($id);
-        $this->createLocations($adventure);
-        $this->createItems($adventure);
-        $this->createControllableCharacters($adventure);
-        $this->createOtherCharacters($adventure);
-
-        return $adventure;
-    }
-
-    private function createAdventure(string $id): AdventureInterface
-    {
-        $adventureData = $this->loadYaml('adventure');
-
-        $adventure = new Adventure($id, $adventureData['name']);
-
-        return $adventure;
-    }
-
-    private function createLocations(AdventureInterface $adventure): void
-    {
-        $yaml = $this->loadYaml('locations');
-
-        foreach ($yaml as $locationKey => $locationData) {
-            $location = new Location($locationKey, $locationData['name']);
-            $adventure->addLocation($location);
-            $this->references[$locationKey] = $location;
+        $characters = [];
+        foreach ($data as $id => $characterData) {
+            $characters[] = new Character($id, $characterData['name']);
         }
+
+        return $characters;
     }
 
-    private function createItems(AdventureInterface $adventure): void
+    private function loadYaml(string $id, string $name): array
     {
-        $yaml = $this->loadYaml('items');
-
-        foreach ($yaml as $itemKey => $itemData) {
-            $item = new Item($itemKey, $itemData['name']);
-            $item->setItemContainer($this->getReference($itemData['location']));
-            $this->setReference($itemKey, $item);
-        }
-    }
-
-    private function createControllableCharacters(AdventureInterface $adventure): void
-    {
-        $yaml = $this->loadYaml('controllable_characters');
-
-        foreach ($yaml as $characterKey => $characterData) {
-            $character = new Character($characterKey, $characterData['name']);
-            $character->setLocation($this->getReference($characterData['location']));
-            $adventure->addControllableCharacter($character);
-            $this->setReference($characterKey, $character);
-        }
-    }
-
-    private function createOtherCharacters(AdventureInterface $adventure): void
-    {
-        $yaml = $this->loadYaml('other_characters');
-
-        foreach ($yaml as $characterKey => $characterData) {
-            $character = new Character($characterKey, $characterData['name']);
-            $character->setLocation($this->getReference($characterData['location']));
-            $adventure->addOtherCharacter($character);
-            $this->setReference($characterKey, $character);
-        }
-    }
-
-    private function setReference(string $key, $object): void
-    {
-        $this->references[$key] = $object;
-    }
-
-    private function getReference(string $key)
-    {
-        return $this->references[$key];
+        return Yaml::parse(strval(file_get_contents($this->basePath.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.$name.'.yaml')));
     }
 }

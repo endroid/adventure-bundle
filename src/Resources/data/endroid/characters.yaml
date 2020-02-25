@@ -1,4 +1,10 @@
-other_characters:
+controllable_characters:
+  gabriel:
+    name: Gabriel
+    location: garden
+  louise:
+    name: Louise
+    location: hall
   hugo:
     name: Hugo
     location: garden

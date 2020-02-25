@@ -11,17 +11,7 @@ services:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
-    Endroid\AdventureBundle\Domain\Command\Handler\:
-        resource: '%kernel.project_dir%/vendor/endroid/adventure-bundle/src/Domain/Command/Handler/*'
-        tags:
-            - { name: messenger.message_handler, bus: messenger.bus.default }
-
-    Endroid\AdventureBundle\Domain\Query\Handler\:
-        resource: '%kernel.project_dir%/vendor/endroid/adventure-bundle/src/Domain/Query/Handler/*'
-        tags:
-            - { name: messenger.message_handler, bus: messenger.bus.default }
-
-    Endroid\AdventureBundle\Domain\Event\Handler\:
-        resource: '%kernel.project_dir%/vendor/endroid/adventure-bundle/src/Domain/Event/Handler/*'
-        tags:
-            - { name: messenger.message_handler, bus: messenger.bus.default }
+#    Endroid\AdventureBundle\Domain\Command\Handler\:
+#        resource: '%kernel.project_dir%/vendor/endroid/adventure-bundle/src/Domain/Command/Handler/*'
+#        tags:
+#            - { name: messenger.message_handler, bus: messenger.bus.default }

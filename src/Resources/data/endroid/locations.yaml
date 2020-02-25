@@ -1,6 +1,7 @@
 locations:
   garden:
     name: Garden
+    description:
   hall:
     name: Hall
   living:

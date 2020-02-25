@@ -9,12 +9,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Exception;
+namespace Endroid\AdventureBundle\Entity;
 
-class InvalidUuidException extends AdventureException
+class Location
 {
-    public static function create(string $uuid): self
+    private $id;
+    private $name;
+
+    public function __construct(string $id, string $name)
     {
-        return new self(sprintf('Invalid UUID "%s"', $uuid));
+        $this->id = $id;
+        $this->name = $name;
     }
 }

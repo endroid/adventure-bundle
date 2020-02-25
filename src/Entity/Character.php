@@ -9,18 +9,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Domain\Entity;
+namespace Endroid\AdventureBundle\Entity;
 
-use Ramsey\Uuid\Uuid;
-
-class Location implements LocationInterface
+class Character
 {
-    use ItemContainerTrait;
-
     private $id;
     private $name;
 
-    public function __construct(Uuid $id, string $name)
+    public function __construct(string $id, string $name)
     {
         $this->id = $id;
         $this->name = $name;

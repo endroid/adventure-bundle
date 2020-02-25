@@ -11,6 +11,14 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Domain\Entity;
 
-interface ControllableCharacterInterface extends CharacterInterface
+class Item
 {
+    private $id;
+    private $name;
+
+    public function __construct(string $id, string $name)
+    {
+        $this->id = $id;
+        $this->name = $name;
+    }
 }

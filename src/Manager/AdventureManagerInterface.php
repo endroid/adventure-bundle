@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Manager;
 
-use Endroid\AdventureBundle\Entity\AdventureInterface;
+use Endroid\AdventureBundle\Entity\Adventure;
 
 interface AdventureManagerInterface
 {
-    public function add(AdventureInterface $adventure): void;
+    public function add(Adventure $adventure): void;
 
     public function get(string $id): AdventureInterface;
 

@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Endroid\AdventureBundle\Builder;
 
-use Endroid\AdventureBundle\Entity\AdventureInterface;
+use Endroid\AdventureBundle\Entity\Adventure;
 
 interface AdventureBuilderInterface
 {
-    public function build(string $id): AdventureInterface;
+    public function build(string $id): Adventure;
 }
