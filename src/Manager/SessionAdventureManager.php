@@ -31,7 +31,7 @@ class SessionAdventureManager implements AdventureManagerInterface
     public function get(string $id): Adventure
     {
         if (!$this->session->has($id)) {
-            throw AdventureNotFoundException::createForId($id);
+            throw new Htt
         }
 
         $adventure = $this->session->get($id);
