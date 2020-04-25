@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Endroid\AdventureBundle\Manager;
 
 use Endroid\AdventureBundle\Entity\Adventure;
+use Endroid\AdventureBundle\Exception\AdventureNotFoundException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionAdventureManager implements AdventureManagerInterface
@@ -31,7 +32,7 @@ class SessionAdventureManager implements AdventureManagerInterface
     public function get(string $id): Adventure
     {
         if (!$this->session->has($id)) {
-            throw new Htt
+            throw AdventureNotFoundException::createForId($id);
         }
 
         $adventure = $this->session->get($id);
