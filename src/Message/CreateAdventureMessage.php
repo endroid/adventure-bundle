@@ -9,20 +9,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Domain\Command;
+namespace Endroid\AdventureBundle\Message;
 
-use Ramsey\Uuid\UuidInterface;
+use Ramsey\Uuid\Uuid;
 
-final class CreateAdventureCommand
+final class CreateAdventureMessage
 {
     private $id;
 
-    public function __construct(UuidInterface $id)
+    public function __construct(string $id)
     {
-        $this->id = $id;
+        $this->id = Uuid::fromString($id)->toString();
     }
 
-    public function getId(): UuidInterface
+    public function getId(): string
     {
         return $this->id;
     }

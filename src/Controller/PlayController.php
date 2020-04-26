@@ -15,9 +15,7 @@ use Endroid\AdventureBundle\Entity\Adventure;
 use Endroid\AdventureBundle\Manager\AdventureManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 class PlayController

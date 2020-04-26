@@ -9,11 +9,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Domain\Command\Handler;
+namespace Endroid\AdventureBundle\Message\Handler;
 
 use Endroid\AdventureBundle\Builder\AdventureBuilderInterface;
-use Endroid\AdventureBundle\Domain\Command\CreateAdventureCommand;
 use Endroid\AdventureBundle\Manager\AdventureManagerInterface;
+use Endroid\AdventureBundle\Message\CreateAdventureMessage;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class CreateAdventureHandler implements MessageHandlerInterface
@@ -27,7 +27,7 @@ class CreateAdventureHandler implements MessageHandlerInterface
         $this->manager = $manager;
     }
 
-    public function __invoke(CreateAdventureCommand $message)
+    public function __invoke(CreateAdventureMessage $message)
     {
         $adventure = $this->builder->build($message->getId());
 

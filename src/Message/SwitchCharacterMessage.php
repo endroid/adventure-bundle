@@ -9,9 +9,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Domain\Command;
+namespace Endroid\AdventureBundle\Message;
 
-class SwitchCharacterCommand
+class SwitchCharacterMessage
 {
     private $adventureId;
     private $characterId;

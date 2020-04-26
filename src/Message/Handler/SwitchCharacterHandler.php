@@ -9,10 +9,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Endroid\AdventureBundle\Domain\Command\Handler;
+namespace Endroid\AdventureBundle\Message\Handler;
 
-use Endroid\AdventureBundle\Domain\Command\SwitchCharacterCommand;
 use Endroid\AdventureBundle\Manager\AdventureManagerInterface;
+use Endroid\AdventureBundle\Message\SwitchCharacterMessage;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class SwitchCharacterHandler implements MessageHandlerInterface
@@ -24,7 +24,7 @@ class SwitchCharacterHandler implements MessageHandlerInterface
         $this->adventureManager = $adventureManager;
     }
 
-    public function __invoke(SwitchCharacterCommand $message)
+    public function __invoke(SwitchCharacterMessage $message)
     {
         $adventure = $this->adventureManager->get($message->getAdventureId());
 
